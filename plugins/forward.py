@@ -24,15 +24,15 @@ Example:
 Note: The bot must be admin in all channels you specify.
 """
     SEND_HELP = """
-**To forward a message:**
+**To forward a message without forwarding tag:**
 1. Reply to any message
 2. Send `/send`
 """
     NO_CHATS_SET = "🚫 You haven't set any chats to forward to. Use /setchat first."
     CHATS_SET_SUCCESS = "✅ Successfully set {count} chat(s) for forwarding!"
     INVALID_CHAT_ID = "❌ Invalid chat ID format. Please provide numeric chat IDs."
-    FORWARD_REPORT = "📤 Forwarded message to {success_count} chat(s)."
-    FORWARD_FAILED = "\n❌ Failed to forward to: {failed_chats}"
+    FORWARD_REPORT = "📤 Copied message to {success_count} chat(s)."
+    FORWARD_FAILED = "\n❌ Failed to copy to: {failed_chats}"
     MY_CHATS_HEADER = "📋 Your configured chats:\n{chat_list}"
     DB_ERROR = "⚠️ Database connection error. Please try again later."
 
@@ -98,10 +98,15 @@ async def forward_message(client: Client, message: Message):
     
     for chat_id in target_chats:
         try:
-            await replied_message.forward(chat_id)
+            # Using copy_message instead of forward to remove "Forwarded from" tag
+            await client.copy_message(
+                chat_id=chat_id,
+                from_chat_id=replied_message.chat.id,
+                message_id=replied_message.id
+            )
             success_count += 1
         except Exception as e:
-            print(f"Failed to forward to {chat_id}: {e}")
+            print(f"Failed to copy to {chat_id}: {e}")
             failed_chats.append(str(chat_id))
     
     report = TEXT.FORWARD_REPORT.format(success_count=success_count)
