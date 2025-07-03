@@ -6,15 +6,10 @@ from config import OWNER  # OWNER.ID is used
 # Text and buttons
 class TEXT:
     START = """
-<b>👋 Hi! I'm your personal Admin Assistant Bot.</b>
-
-💬 When users message me, their messages are instantly forwarded to my admin.
-
-📨 If the admin replies, I’ll send that reply back to the original user — all privately.
-
-<b>Simple. Private. Effective.</b>
-
-No commands needed — just start chatting!
+<b> commands </b>
+1. /setchat - /setchat channel_id_1  channel_id_2 channel_id_1 channel_id_3
+2. /send - reply to a message
+3. /mychats - list of all chats
 """
     DEVELOPER = "👨‍💻 Developer"
     UPDATES_CHANNEL = "📢 Updates Channel"
