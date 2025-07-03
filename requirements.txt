@@ -9,15 +9,4 @@ python-dotenv
 TgCrypto
 feedparser
 Flask
-cloudscraper
 requests
-beautifulsoup4
-lxml
-torrent-parser
-bencodepy
-certifi
-urllib3
-setuptools
-selenium>=4.0.0
-webdriver-manager
-terabox-downloader
